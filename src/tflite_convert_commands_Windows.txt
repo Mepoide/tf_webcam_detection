@@ -1,0 +1,29 @@
+From
+
+>>> (nib_box_track) G:\Mi unidad\Newral\tf_lite_models>
+
+tflite_convert --enable_v1_converter --graph_def_file=tflite_graph.pb --output_file=detect.tflite --input_shapes=1,300,300,3 --input_arrays=normalized_input_image_tensor --output_arrays=TFLite_Detection_PostProcess,TFLite_Detection_PostProcess:1,TFLite_Detection_PostProcess:2,TFLite_Detection_PostProcess:3 --inference_type=QUANTIZED_UINT8 --mean_values=128 --std_dev_values=128 --change_concat_input_ranges=false --allow_custom_ops
+
+tflite_convert --enable_v1_converter --graph_def_file=tflite_graph.pb --output_file=detect.tflite --input_shapes=1,300,300,3 --input_arrays=normalized_input_image_tensor --output_arrays=detection_boxes,detection_classes,detection_scores,num_boxes --inference_type=QUANTIZED_UINT8 --mean_values=128 --std_dev_values=128 --change_concat_input_ranges=false --allow_custom_ops
+
+tflite_convert --enable_v1_converter --graph_def_file=tflite_graph.pb --output_file=detect.tflite --input_shapes=1,300,300,3 --input_arrays=normalized_input_image_tensor --output_arrays=TFLite_Detection_PostProcess,TFLite_Detection_PostProcess:1,TFLite_Detection_PostProcess:2,TFLite_Detection_PostProcess:3 --inference_type=FLOAT --allow_custom_ops
+
+Para convertir nuestro modelo: 
+
+1. https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md
+	
+# From the tensorflow/models/research/ directory
+python object_detection/export_tflite_graph_tf2.py --pipeline_config_path "G:\Mi unidad\Newral\tf_models\package_ssd_mobilenet_v2_fpnlite_320\pipeline_v_mep.config" --trained_checkpoint_dir "G:\Mi unidad\Newral\tf_models\package_ssd_mobilenet_v2_fpnlite_320\checkpoint" --output_directory "G:\Mi unidad\Newral\tf_models\package_ssd_mobilenet_v2_fpnlite_320"
+
+# From the tensorflow/models/research/ directory
+python object_detection/export_tflite_ssd_graph.py --pipeline_config_path "G:\Mi unidad\Newral\tf_models\package_ssd_mobilenet_v2_fpnlite_320\pipeline_v_mep.config" --trained_checkpoint_dir "G:\Mi unidad\Newral\tf_models\package_ssd_mobilenet_v2_fpnlite_320\checkpoint" --output_directory "G:\Mi unidad\Newral\tf_models\package_ssd_mobilenet_v2_fpnlite_320"
+
+From 
+
+>>> (nib_box_track) G:\Mi unidad\Newral\tf_models\package_ssd_mobilenet_v2_fpnlite_320>
+
+tflite_convert --saved_model_dir=saved_model --output_file=package_detect.tflite 
+
+tflite_convert --saved_model_dir=saved_model --output_file=package_detect.tflite --input_shapes=1,300,300,3 --input_arrays=normalized_input_image_tensor --output_arrays=TFLite_Detection_PostProcess,TFLite_Detection_PostProcess:1,TFLite_Detection_PostProcess:2,TFLite_Detection_PostProcess:3 --inference_type=FLOAT --allow_custom_ops
+
+tflite_convert --enable_v1_converter --graph_def_file=saved_model\saved_model.pb --output_file=detect.tflite --input_shapes=1,300,300,3 --input_arrays=normalized_input_image_tensor --output_arrays=TFLite_Detection_PostProcess,TFLite_Detection_PostProcess:1,TFLite_Detection_PostProcess:2,TFLite_Detection_PostProcess:3 --inference_type=FLOAT --allow_custom_ops
